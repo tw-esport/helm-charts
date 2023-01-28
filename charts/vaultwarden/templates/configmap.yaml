@@ -8,49 +8,41 @@ metadata:
 data:
   {{- with .Values.vaultwarden }}
   {{- with .accounts.register }}
-  SIGNUPS_ALLOWED: {{ print "%t" .enabled }}
-  SIGNUPS_VERIFY: {{ print "%t" .verify }}
+  SIGNUPS_ALLOWED: {{ print "%t" .enabled | quote }}
+  SIGNUPS_VERIFY: {{ print "%t" .verify | quote }}
   {{- if .domainAllowList }}
-  SIGNUPS_DOMAINS_WHITELIST: {{ .domainAllowList }}
+  SIGNUPS_DOMAINS_WHITELIST: {{ .domainAllowList | quote }}
   {{- end }}
   {{- end }}
-
   {{- with .accounts.invite }}
-  INVITATIONS_ALLOWED: {{ print "%t" .enabled }}
+  INVITATIONS_ALLOWED: {{ print "%t" .enabled | quote }}
   INVITATION_ORG_NAME: {{ .inviter | default "Vaultwarden" }}
-  INVITATION_EXPIRATION_HOURS: {{ .expiration }}
+  INVITATION_EXPIRATION_HOURS: {{ .expiration | quote }}
   {{- end }}
-
-  DOMAIN: {{ .domain }}
-
-  LOG_LEVEL: {{ .logLevel }}
-
+  DOMAIN: {{ .domain | quote }}
+  LOG_LEVEL: {{ .logLevel | quote }}
   {{- with .sends }}
-  SENDS_ALLOWED: {{ print "%t" .enabled }}
+  SENDS_ALLOWED: {{ print "%t" .enabled | quote }}
   {{- end }}
-
   {{- with .server }}
-  ROCKET_ADDRESS: {{ .address }}
-  ROCKET_PORT: {{ .port }}
+  ROCKET_ADDRESS: {{ .address | quote }}
+  ROCKET_PORT: {{ .port | quote }}
   {{- end }}
-
   {{- with .smtp }}
-  SMTP_HOST: {{ .host }}
-  SMTP_FROM: {{ .from.address }}
-  SMTP_FROM_NAME: {{ .from.name }}
-  SMTP_SECURITY: {{ .security }}
-  SMTP_PORT: {{ .port }}
-  SMTP_AUTH_MECHANISM: {{ .auth }}
+  SMTP_HOST: {{ .host | quote }}
+  SMTP_FROM: {{ .from.address | quote }}
+  SMTP_FROM_NAME: {{ .from.name | quote }}
+  SMTP_SECURITY: {{ .security | quote }}
+  SMTP_PORT: {{ .port | quote }}
+  SMTP_AUTH_MECHANISM: {{ .auth | quote }}
   {{- end }}
-
   {{- with .webVault }}
-  WEB_VAULT_ENABLED: {{ print "%t" .enabled }}
-  WEB_VAULT_FOLDER: {{ .path }}
+  WEB_VAULT_ENABLED: {{ print "%t" .enabled | quote }}
+  WEB_VAULT_FOLDER: {{ .path | quote }}
   {{- end }}
-
   {{- with .websocket }}
-  WEBSOCKET_ENABLED: {{ print "%t" .enabled }}
-  WEBSOCKET_ADDRESS: {{ .address }}
-  WEBSOCKET_PORT: {{ .port }}
+  WEBSOCKET_ENABLED: {{ print "%t" .enabled | quote }}
+  WEBSOCKET_ADDRESS: {{ .address | quote }}
+  WEBSOCKET_PORT: {{ .port | quote }}
   {{- end }}
   {{- end }}
