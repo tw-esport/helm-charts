@@ -8,7 +8,7 @@ metadata:
 data:
   {{- with .Values.vaultwarden }}
   {{- with .accounts.register }}
-  SIGNUPS_ALLOWED: {{ .enabled }}
+  SIGNUPS_ALLOWED: {{ print "%t" .enabled }}
   SIGNUPS_VERIFY: {{ .verify }}
   {{- if .domainAllowList }}
   SIGNUPS_DOMAINS_WHITELIST: {{ .domainAllowList }}
@@ -16,7 +16,7 @@ data:
   {{- end }}
 
   {{- with .accounts.invite }}
-  INVITATIONS_ALLOWED: {{ .enabled }}
+  INVITATIONS_ALLOWED: {{ print "%t" .enabled }}
   INVITATION_ORG_NAME: {{ .inviter | default "Vaultwarden" }}
   INVITATION_EXPIRATION_HOURS: {{ .expiration }}
   {{- end }}
@@ -26,7 +26,7 @@ data:
   LOG_LEVEL: {{ .logLevel }}
 
   {{- with .sends }}
-  SENDS_ALLOWED: {{ .enabled }}
+  SENDS_ALLOWED: {{ print "%t" .enabled }}
   {{- end }}
 
   {{- with .server }}
@@ -44,12 +44,12 @@ data:
   {{- end }}
 
   {{- with .webVault }}
-  WEB_VAULT_ENABLED: {{ .enabled }}
+  WEB_VAULT_ENABLED: {{ print "%t" .enabled }}
   WEB_VAULT_FOLDER: {{ .path }}
   {{- end }}
 
   {{- with .websocket }}
-  WEBSOCKET_ENABLED: {{ .enabled }}
+  WEBSOCKET_ENABLED: {{ print "%t" .enabled }}
   WEBSOCKET_ADDRESS: {{ .address }}
   WEBSOCKET_PORT: {{ .port }}
   {{- end }}
