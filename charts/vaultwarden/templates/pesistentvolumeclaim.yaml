@@ -12,7 +12,7 @@ metadata:
 spec:
   resources:
     request:
-    storage: {{ .Values.persistentVolumeClaim.storage }}
+      storage: {{ .Values.persistentVolumeClaim.storage }}
   storageClassName: {{ .Values.persistentVolumeClaim.storageClassName }}
   accessModes:
   - ReadWriteOnce
