@@ -10,10 +10,10 @@ metadata:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
-resources:
-  request:
-  storage: {{ .Values.persistentVolumeClaim.storage }}
-storageClassName: {{ .Values.persistentVolumeClaim.storageClassName }}
-accessModes:
+  resources:
+    request:
+    storage: {{ .Values.persistentVolumeClaim.storage }}
+  storageClassName: {{ .Values.persistentVolumeClaim.storageClassName }}
+  accessModes:
   - ReadWriteOnce
 {{- end }}
