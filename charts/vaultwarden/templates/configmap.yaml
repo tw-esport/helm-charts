@@ -9,7 +9,7 @@ data:
   {{- with .Values.vaultwarden }}
   {{- with .accounts.register }}
   SIGNUPS_ALLOWED: {{ print "%t" .enabled }}
-  SIGNUPS_VERIFY: {{ .verify }}
+  SIGNUPS_VERIFY: {{ print "%t" .verify }}
   {{- if .domainAllowList }}
   SIGNUPS_DOMAINS_WHITELIST: {{ .domainAllowList }}
   {{- end }}
