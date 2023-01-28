@@ -10,12 +10,14 @@ data:
   {{- with .accounts.register }}
   SIGNUPS_ALLOWED: {{ .enabled }}
   SIGNUPS_VERIFY: {{ .verify }}
+  {{- if .domainAllowList }}
   SIGNUPS_DOMAINS_WHITELIST: {{ .domainAllowList }}
+  {{- end }}
   {{- end }}
 
   {{- with .accounts.invite }}
   INVITATIONS_ALLOWED: {{ .enabled }}
-  INVITATION_ORG_NAME: {{ .inviter }}
+  INVITATION_ORG_NAME: {{ .inviter | default "Vaultwarden" }}
   INVITATION_EXPIRATION_HOURS: {{ .expiration }}
   {{- end }}
 
