@@ -8,21 +8,21 @@ metadata:
 data:
   {{- with .Values.vaultwarden }}
   {{- with .accounts.register }}
-  SIGNUPS_ALLOWED: {{ print "%t" .enabled | quote }}
-  SIGNUPS_VERIFY: {{ print "%t" .verify | quote }}
+  SIGNUPS_ALLOWED: {{ print .enabled | quote }}
+  SIGNUPS_VERIFY: {{ print .verify | quote }}
   {{- if .domainAllowList }}
   SIGNUPS_DOMAINS_WHITELIST: {{ .domainAllowList | quote }}
   {{- end }}
   {{- end }}
   {{- with .accounts.invite }}
-  INVITATIONS_ALLOWED: {{ print "%t" .enabled | quote }}
+  INVITATIONS_ALLOWED: {{ print .enabled | quote }}
   INVITATION_ORG_NAME: {{ .inviter | default "Vaultwarden" }}
   INVITATION_EXPIRATION_HOURS: {{ .expiration | quote }}
   {{- end }}
   DOMAIN: {{ .domain | quote }}
   LOG_LEVEL: {{ .logLevel | quote }}
   {{- with .sends }}
-  SENDS_ALLOWED: {{ print "%t" .enabled | quote }}
+  SENDS_ALLOWED: {{ print .enabled | quote }}
   {{- end }}
   {{- with .server }}
   ROCKET_ADDRESS: {{ .address | quote }}
@@ -37,11 +37,11 @@ data:
   SMTP_AUTH_MECHANISM: {{ .auth | quote }}
   {{- end }}
   {{- with .webVault }}
-  WEB_VAULT_ENABLED: {{ print "%t" .enabled | quote }}
+  WEB_VAULT_ENABLED: {{ print .enabled | quote }}
   WEB_VAULT_FOLDER: {{ .path | quote }}
   {{- end }}
   {{- with .websocket }}
-  WEBSOCKET_ENABLED: {{ print "%t" .enabled | quote }}
+  WEBSOCKET_ENABLED: {{ print .enabled | quote }}
   WEBSOCKET_ADDRESS: {{ .address | quote }}
   WEBSOCKET_PORT: {{ .port | quote }}
   {{- end }}
