@@ -1,6 +1,8 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "vaultwarden.fullname" . -}}
-{{- $svcPort := .Values.service.port -}}
+{{- $httpPort := .Values.service.http -}}
+{{- $websocketEnabled := .Values.vaultwarden.websocket.enabled -}}
+{{- $websocketPort := .Values.service.websocket -}}
 {{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
   {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
   {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
@@ -37,11 +39,10 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-    {{- range .Values.ingress.hosts }}
-    - host: {{ .host | quote }}
+    - host: {{ .Values.ingress.host | quote }}
       http:
         paths:
-          {{- range .paths }}
+          {{- range .Values.ingress.paths }}
           - path: {{ .path }}
             {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
             pathType: {{ .pathType }}
@@ -51,11 +52,40 @@ spec:
               service:
                 name: {{ $fullName }}
                 port:
-                  number: {{ $svcPort }}
+                  number: {{ $httpPort }}
               {{- else }}
               serviceName: {{ $fullName }}
-              servicePort: {{ $svcPort }}
+              servicePort: {{ $httpPort }}
+              {{- end }}
+          {{- if }}
+          - path: {{ join (list (trimSuffix .path "/") "/notifications/hub" ) }}
+            {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
+            pathType: {{ .pathType }}
+            {{- end }}
+            backend:
+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $websocketPort }}
+              {{- else }}
+              serviceName: {{ $fullName }}
+              servicePort: {{ $websocketPort }}
+              {{- end }}
+          - path: {{ join (list (trimSuffix .path "/") "/notifications/hub/negotiate" ) }}
+            {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
+            pathType: {{ .pathType }}
+            {{- end }}
+            backend:
+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $httpPort }}
+              {{- else }}
+              serviceName: {{ $fullName }}
+              servicePort: {{ $httpPort }}
               {{- end }}
           {{- end }}
-    {{- end }}
+          {{- end }}
 {{- end }}

@@ -6,16 +6,20 @@ metadata:
   labels:
     {{- include "vaultwarden.labels" . | nindent 4 }}
 data:
+  ROCKET_PORT: {{ .Values.service.http | quote }}
+  {{- if .Values.vaultwarden.websocket.enabled }}
+  WEBSOCKET_PORT: {{ .Values.service.websocket | quote }}
+  {{- end }}
   {{- with .Values.vaultwarden }}
   {{- with .accounts.register }}
-  SIGNUPS_ALLOWED: {{ print .enabled | quote }}
-  SIGNUPS_VERIFY: {{ print .verify | quote }}
+  SIGNUPS_ALLOWED: {{ .enabled | quote }}
+  SIGNUPS_VERIFY: {{ .verify | quote }}
   {{- if .domainAllowList }}
   SIGNUPS_DOMAINS_WHITELIST: {{ .domainAllowList | quote }}
   {{- end }}
   {{- end }}
   {{- with .accounts.invite }}
-  INVITATIONS_ALLOWED: {{ print .enabled | quote }}
+  INVITATIONS_ALLOWED: {{ .enabled | quote }}
   INVITATION_ORG_NAME: {{ .inviter | default "Vaultwarden" }}
   INVITATION_EXPIRATION_HOURS: {{ .expiration | quote }}
   {{- end }}
@@ -26,7 +30,6 @@ data:
   {{- end }}
   {{- with .server }}
   ROCKET_ADDRESS: {{ .address | quote }}
-  ROCKET_PORT: {{ .port | quote }}
   {{- end }}
   {{- with .smtp }}
   SMTP_HOST: {{ .host | quote }}
@@ -37,12 +40,11 @@ data:
   SMTP_AUTH_MECHANISM: {{ .auth | quote }}
   {{- end }}
   {{- with .webVault }}
-  WEB_VAULT_ENABLED: {{ print .enabled | quote }}
+  WEB_VAULT_ENABLED: {{ .enabled | quote }}
   WEB_VAULT_FOLDER: {{ .path | quote }}
   {{- end }}
   {{- with .websocket }}
-  WEBSOCKET_ENABLED: {{ print .enabled | quote }}
+  WEBSOCKET_ENABLED: {{ .enabled | quote }}
   WEBSOCKET_ADDRESS: {{ .address | quote }}
-  WEBSOCKET_PORT: {{ .port | quote }}
   {{- end }}
   {{- end }}

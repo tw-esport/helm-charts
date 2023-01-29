@@ -41,7 +41,10 @@ spec:
                 name: {{ $fullName }}
           ports:
             - name: http
-              containerPort: {{ .Values.service.port }}
+              containerPort: {{ .Values.service.http }}
+              protocol: TCP
+            - name: websocket
+              containerPort: {{ .Values.service.websocket }}
               protocol: TCP
           livenessProbe:
             httpGet:

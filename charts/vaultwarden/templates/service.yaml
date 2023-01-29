@@ -7,9 +7,15 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
+    - port: {{ .Values.service.http }}
       targetPort: http
       protocol: TCP
       name: http
+    {{- if .Values.vaultwarden.websocket.enabled }}
+    - port: {{ .Values.service.websocket }}
+      targetPort: websocket
+      protocol: TCP
+      name: websocket
+    {{- end }}
   selector:
     {{- include "vaultwarden.selectorLabels" . | nindent 4 }}
