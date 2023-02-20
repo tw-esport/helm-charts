@@ -57,8 +57,8 @@ spec:
               serviceName: {{ $fullName }}
               servicePort: {{ $httpPort }}
               {{- end }}
-          {{- if }}
-          - path: {{ join (list (trimSuffix .path "/") "/notifications/hub" ) }}
+          {{- if $websocketEnabled }}
+          - path: {{ join (list (trimSuffix .path "/") "/notifications/hub") "" }}
             {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
             pathType: {{ .pathType }}
             {{- end }}
@@ -87,5 +87,5 @@ spec:
               servicePort: {{ $httpPort }}
               {{- end }}
           {{- end }}
-          {{- end }}
+        {{- end }}
 {{- end }}
