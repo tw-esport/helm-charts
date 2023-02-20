@@ -3,6 +3,17 @@ entries:
   vaultwarden:
   - apiVersion: v2
     appVersion: 1.27.0
+    created: "2023-02-20T16:12:37.408666316Z"
+    description: Alternative implementation of the Bitwarden server API in Rust, including
+      the Web Vault.
+    digest: 2283b973e8a18351fa94e50c1b953f01a0b35543785ca28850165c65905bc1c5
+    name: vaultwarden
+    type: application
+    urls:
+    - https://github.com/tw-esport/helm-charts/releases/download/vaultwarden-0.2.15/vaultwarden-0.2.15.tgz
+    version: 0.2.15
+  - apiVersion: v2
+    appVersion: 1.27.0
     created: "2023-02-20T16:09:06.17273306Z"
     description: Alternative implementation of the Bitwarden server API in Rust, including
       the Web Vault.
@@ -166,4 +177,4 @@ entries:
     urls:
     - https://github.com/tw-esport/helm-charts/releases/download/vaultwarden-0.2.0/vaultwarden-0.2.0.tgz
     version: 0.2.0
-generated: "2023-02-20T16:09:06.172817962Z"
+generated: "2023-02-20T16:12:37.408755516Z"
