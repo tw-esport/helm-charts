@@ -1,5 +1,39 @@
 apiVersion: v1
 entries:
+  maddy:
+  - annotations:
+      artifacthub.io/changes: |-
+        - kind: changed
+          description: |
+            Disable openMetrics service
+    apiVersion: v2
+    appVersion: 0.7.1
+    created: "2024-08-15T20:11:56.851429766Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 15.5.21
+    - name: common
+      repository: https://bjw-s.github.io/helm-charts
+      version: 3.3.2
+    description: Maddy Mail Server
+    digest: 2faf5440a8d23166b0c4c634c49dc2bc90fbf120b3e37f87ecb3c4a613c4fb36
+    home: https://tw-esport.github.io/helm-charts
+    keywords:
+    - maddy
+    - mail
+    kubeVersion: '>=1.16.0-0'
+    maintainers:
+    - email: margotni@tw-esport.de
+      name: nols1000
+    name: maddy
+    sources:
+    - https://github.com/tw-esport/helm-charts/tree/main
+    - https://github.com/foxcpp/maddy
+    urls:
+    - https://github.com/tw-esport/helm-charts/releases/download/maddy-5.0.0/maddy-5.0.0.tgz
+    version: 5.0.0
   vaultwarden:
   - apiVersion: v2
     appVersion: 1.27.0
@@ -188,4 +222,4 @@ entries:
     urls:
     - https://github.com/tw-esport/helm-charts/releases/download/vaultwarden-0.2.0/vaultwarden-0.2.0.tgz
     version: 0.2.0
-generated: "2023-02-20T16:15:55.14198779Z"
+generated: "2024-08-15T20:11:56.851480602Z"
