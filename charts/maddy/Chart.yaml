@@ -1,0 +1,33 @@
+---
+apiVersion: v2
+appVersion: 0.7.1
+description: Maddy Mail Server
+name: maddy
+version: 5.0.0
+kubeVersion: ">=1.16.0-0"
+keywords:
+  - maddy
+  - mail
+home: https://tw-esport.github.io/helm-charts
+# Project has no icon yet
+# icon: https://maddy.org/icon
+sources:
+  - https://github.com/tw-esport/helm-charts/tree/main
+  - https://github.com/foxcpp/maddy
+maintainers:
+  - name: nols1000
+    email: margotni@tw-esport.de
+dependencies:
+  - name: postgresql
+    version: 15.5.21
+    repository: https://charts.bitnami.com/bitnami
+    condition: postgresql.enabled
+  - name: common
+    repository: https://bjw-s.github.io/helm-charts
+    version: 3.3.2
+
+annotations:
+  artifacthub.io/changes: |-
+    - kind: changed
+      description: |
+        Disable openMetrics service
